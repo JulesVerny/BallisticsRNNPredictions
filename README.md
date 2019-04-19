@@ -1,7 +1,7 @@
 ## Ballistics RNN Predictions  ##
-The use of Recurrent Nueral Networks to predict Ballistics 
+The use of Recurrent Nueral Networks to predict and defend against Ballistics 
 
-This set of Files simulates basic 2-D ballistics fires using LSTM based neural networks to make predictions on the landing point. The Predictions are based upon the profile of the initial few seconds of launch.  
+This set of Files simulates basic 2-D ballistics fires using LSTM based neural networks to make predictions on the landing point and so aid air defence. The Predictions are based upon the profile of the initial few seconds of launch.  
 
 ![picture alt](https://github.com/JulesVerny/BallisticsRNNPredictions/blob/master/BallisticsPic.PNG "Ballistics Picture")
 
@@ -38,7 +38,7 @@ However the results are generally quite good, with Test predictions within 10.0m
 
 ### Useage ###
 * python CollectTrainingData.py   : This script captures a large set of Ballistics profiles Launch Data, and Destination data. Stores the Data in TrainingSetX/Y.npy numpy data files
-* python TrainModel.py  : This script reads the TrainingData Sets and performs a keras LSTM model fit agaisnt the data. The Model is saved into BallisticsModel.h5 
+* python TrainModel.py  : This script reads the TrainingData Sets and performs a keras LSTM model fit against the data. The Model is saved into BallisticsModel.h5 
 * python TestModel.py   : This script loads the  BallisticsModel.h5 model, and makes a predictions from the initial Launch data. Press SPACE-BAR to Launch, To Continue and then to Exit. 
 
 The Ballistics.py contains the ballistcs model, and animimations in Pygame. 

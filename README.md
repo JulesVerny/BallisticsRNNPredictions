@@ -1,11 +1,17 @@
 ## Ballistics RNN Predictions  ##
 The use of Recurrent Nueral Networks to predict Ballistics 
 
-This set of Files simulates basic ballistics fires and uses LSTM based neural networks to make predictions on the landing point, based upon the profile of the launch (first few seconds of launch).  
+This set of Files simulates basic 2-D ballistics fires using LSTM based neural networks to make predictions on the landing point. The Predictions are based upon the profile of the initial few seconds of launch.  
 
 ![picture alt](https://github.com/JulesVerny/BallisticsRNNPredictions/blob/master/BallisticsPic.PNG "Ballistics Picture")
 
-This is achieved through Training the Keras based 2-layer LSTM network through a large number of ballistics firing samples (c.f. 400).  The X is a Time sequence of the first launch Porfile (first 25 [x,y] positions)  and the Y predicted valye is the Distance to Target. The Training Data is captured from a large (c.f. 400) set of Ballistics samples through simulation. The LSTM model is then trained against this training set (TrainingSetX.npy and TrainingSetY.npy files).  The model is saved in BallistcisMode.h5.  
+These examples are based upon Training a Keras based 2-layer LSTM network through a large number of ballistics firing samples (c.f. 400).  The X Input is the 2-D time sequence of the first 25 points during missile launch, and the Y dependent variable is the Distance to Landing point. The Training Data is captured through a large (c.f. 400) set of Ballistics simulations which are captured into  (TrainingSetX.npy and TrainingSetY.npy files. The LSTM model is then trained against this training set, over 100 epochs, and the model  saved in BallisticsModel.h5.  This model can then be used for Test predictions.   
+
+Prediction of ballistics landing based upon the initial launch 15 values of (x,y) are used to feed the LSTM input sequence. The prediction in this 2-D representation therefore only two features, and one Y (Predicted Destination Distance) output:
+
+![picture alt](https://github.com/JulesVerny/BallisticsRNNPredictions/blob/master/PredPic.PNG "Prediction Picture")
+
+Although simple maths could perform these calculations. This example is to demonstrate how Recurrent Networks can be employed for time series predictions. More sophisticated missile dynamics, would obviously need access to lot more representative data samples to train the models upon.  
 
 ### Keras LSTM Model ###
 I prefer to use keras, as it is simple way to understand and construct nueral networks. 

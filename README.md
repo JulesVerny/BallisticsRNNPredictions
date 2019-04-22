@@ -18,9 +18,13 @@ I prefer to use keras, as it is simple way to understand and construct nueral ne
 The core of the LSTM model is a two layers as follows:
 
   model = Sequential()
+  
   model.add(LSTM(32, activation='relu', return_sequences=True, input_shape=(NumberTimeSteps, NumberFeatures)))
+  
   model.add(LSTM(32, activation='relu',return_sequences=False))  
+  
   model.add(Dense(1))
+  
   model.compile(optimizer='adam', loss='mse')
 
 NumberFearures = 2 and NumberTimeSteps = 15. I suspect that leads to some overfitting.  The model is trained over 100 epochs, and the loss profiles are a little erratic after the significant loss reductions within the first 20 epochs. 

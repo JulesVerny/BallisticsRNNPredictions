@@ -1,7 +1,7 @@
 ## Ballistics RNN Predictions  ##
 The use of Recurrent Nueral Networks to predict and defend against Ballistics 
 
-This set of Files simulates basic 2-D ballistics fires using LSTM based neural networks to make predictions on the landing point and so aid air defence. The Predictions are based upon the profile of the initial few seconds of launch.  
+This set of Files simulates basic 2-D ballistics fires using LSTM based neural networks to make predictions on the landing point and so aid air defence. The Predictions are based upon the profile of the initial few seconds of launch.  The LSTM is implemented using keras and the graphics use PyGame. 
 
 ![picture alt](https://github.com/JulesVerny/BallisticsRNNPredictions/blob/master/BallisticsPic.PNG "Ballistics Picture")
 
@@ -17,17 +17,13 @@ Although simple maths could perform these calculations. This example is to demon
 I prefer to use keras, as it is simple way to understand and construct nueral networks. 
 The core of the LSTM model is a two layers as follows:
 
-model = Sequential()
+  model = Sequential()
+  model.add(LSTM(32, activation='relu', return_sequences=True, input_shape=(NumberTimeSteps, NumberFeatures)))
+  model.add(LSTM(32, activation='relu',return_sequences=False))  
+  model.add(Dense(1))
+  model.compile(optimizer='adam', loss='mse')
 
-model.add(LSTM(32, activation='relu', return_sequences=True, input_shape=(NumberTimeSteps, NumberFeatures)))
-
-model.add(LSTM(32, activation='relu',return_sequences=False))  
-
-model.add(Dense(1))
-
-model.compile(optimizer='adam', loss='mse')
-
-I suspect that leads to some overfitting.  The model is traiend over 100 epochs, and the loss profiles becomes rather erratic after the significant loss reductions within the first 20 epochs. 
+NumberFearures = 2 and NumberTimeSteps = 15. I suspect that leads to some overfitting.  The model is trained over 100 epochs, and the loss profiles are a little erratic after the significant loss reductions within the first 20 epochs. 
 
 
 ![picture alt](https://github.com/JulesVerny/BallisticsRNNPredictions/blob/master/TrainingLoss.png "Loss Profile")
@@ -41,7 +37,7 @@ However the results are generally quite good, with Test predictions within 10.0m
 * python TrainModel.py  : This script reads the TrainingData Sets and performs a keras LSTM model fit against the data. The Model is saved into BallisticsModel.h5 
 * python TestModel.py   : This script loads the  BallisticsModel.h5 model, and makes a predictions from the initial Launch data. Press SPACE-BAR to Launch, To Continue and then to Exit. 
 
-The Ballistics.py contains the ballistcs model, and animimations in Pygame. 
+The Ballistics.py contains the ballistcs model, and animations displayed using Pygame. 
 
 ### Main Python Package Dependencies ###
 pygame, keras [hence TensorFlow,Theano], numpy, matplotlib
